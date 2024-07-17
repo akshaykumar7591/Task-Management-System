@@ -1,0 +1,155 @@
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+  <style>
+    .background-radial-gradient {
+      background-color: hsl(218, 41%, 15%);
+      background-image: radial-gradient(650px circle at 0% 0%,
+          hsl(218, 41%, 35%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%),
+        radial-gradient(1250px circle at 100% 100%,
+          hsl(218, 41%, 45%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%);
+    }
+
+    #radius-shape-1 {
+      height: 220px;
+      width: 220px;
+      top: -60px;
+      left: -130px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
+
+    #radius-shape-2 {
+      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+      bottom: -60px;
+      right: -110px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
+
+    .bg-glass {
+      background-color: hsla(0, 0%, 100%, 0.9) !important;
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+  </style>
+
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+         <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+          A better online  <br />
+          <span style="color: hsl(218, 81%, 75%)">to-do list app for work</span>
+        </h1>
+        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+         Asana makes it easier for a team to plan their work by using online to-do lists.
+         Say goodbye to handwritten to-do lists with missing details, and say hello to
+          having all the information you need to get your tasks done.
+        </p>
+      </div>
+
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+        <div class="card bg-glass">
+          <div class="card-body px-4 py-5 px-md-5">
+          <div class="d-flex ml-6">
+           <a routerLink='/todo'> <i class="fa fa-arrow-left" style="font-size:38px;color:black"></i></a>
+           <h2 class="fw-bold mb-2 text-uppercase px-4">Create an account</h2>
+              
+          </div>
+           
+              
+            <form #form='ngForm'>
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="form3Example1">First name</label>
+                    <input type="text" id="form3Example1" #fName='ngModel' name="firstName" [(ngModel)]="studentObj.firstName" class="form-control"  required/>
+                    <div class="text-danger">
+                    @if((fName.touched || fName.dirty) && fName.errors?.['required'] ){
+                    <span> This Is Required</span>
+                    }
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="form3Example2">Last name</label>
+                    <input type="text" id="form3Example2" #lName='ngModel' name="LastName" [(ngModel)]="studentObj.lastName" class="form-control"  required/>
+                    <div class="text-danger">
+                    @if((lName.touched || lName.dirty) && lName.errors?.['required'] ){
+                    <span> This Is Required</span>
+                    }
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Email input -->
+              <div data-mdb-input-init class="form-outline mb-4">
+               <label class="form-label" for="form3Example3">Email address</label>
+                <input type="email"  #eMail="ngModel" name="email" id="form3Example3" [(ngModel)]="studentObj.email" class="form-control"  required/>
+               
+                <div class="text-danger">
+                 @if((eMail.touched|| eMail.dirty) && eMail.errors?.['required']){
+                       <span> This is Required</span>
+                 }
+                </div>
+              </div>
+
+              <!-- Password input -->
+              <div data-mdb-input-init class="form-outline mb-4">
+               <label class="form-label" for="form3Example4">Password</label>
+                <input type="password"  #passWord="ngModel" name="password" id="form3Example4" [(ngModel)]="studentObj.password" class="form-control"  required  minlength="5"/>
+               <div class="text-danger">
+                 @if((passWord.touched || passWord.dirty) && passWord.errors?.['required']){
+                       <span> This is Required</span>
+                 }
+                 @else if(passWord.errors?.['minlength']){
+                   <span> MIn 5 Char Required</span>
+                 }
+                </div>
+              </div>
+
+             <div class="form-check d-flex justify-content-center mb-5">
+                  <input class="form-check-input" #check="ngModel" type="checkbox" name="isAcceptTerms" [(ngModel)]="studentObj.isAcceptTerms" value="" id="form1Example3" required />
+                  <label class="form-check-label" for="form2Example3g">
+                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                  </label>
+
+                  <div class="text-danger">
+                 @if(check.touched && check.errors?.['required']){
+                       <span> This is Required</span>
+                 }
+                </div>
+                </div>
+
+              <!-- Submit button -->
+              
+              <!-- Register buttons -->
+               <div class="text-center text-lg-start mt-4 pt-2 d-flex justify-content-between">
+            <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;" [disabled]='form.invalid' (click)="onSubmit()">SignUp</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Have already an account? <a class="nav-link active" routerLink="/login"
+                class="link-danger">Login here</a></p>
+          </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->
